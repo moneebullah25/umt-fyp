@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "umt-fyp"
+  site-url: "https://moneebullah25.github.io/umt-fyp"
+  description: "Leveraging GPT for Embedded C Code Generation"
+  repo-branch: main
+  repo-url: "https://github.com/moneebullah25/umt-fyp"
