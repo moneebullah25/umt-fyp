@@ -16,7 +16,31 @@ pip install umt_fyp
 Fill me in please! Don’t forget code examples:
 
 ``` python
-1+1
+import torch
 ```
 
-    2
+``` python
+if __name__ == "__main__":
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    x = torch.tensor([[1, 5, 6, 4, 3, 9, 5, 2, 0], [1, 8, 7, 3, 4, 5, 6, 7, 2]]).to(device)
+    trg = torch.tensor([[1, 7, 4, 3, 5, 9, 2, 0], [1, 5, 6, 2, 4, 7, 6, 2]]).to(device)
+    src_pad_idx = 0 # index of the padding token in source vocabulary
+    trg_pad_idx = 0 # index of the padding token in target vocabulary
+    src_vocab_size = 10 # number of unique tokens in source vocabulary
+    trg_vocab_size = 10 # number of unique tokens in target vocabulary
+    
+    print(f"Input shape: {x.shape}")
+    print(f"Target shape: {trg.shape}")
+    print(f"Device available: {device}")
+    
+    model = Transformer(src_vocab_size, trg_vocab_size, src_pad_idx, trg_pad_idx, device=device).to(device)
+    out = model(x, trg[:, :-1])
+    print(f"Output shape: {out.shape}")
+    print(f"Output: {out}")
+```
+
+    Input shape: torch.Size([2, 9])
+    Target shape: torch.Size([2, 8])
+    Device available: cuda
+
+    NameError: name 'Transformer' is not defined
