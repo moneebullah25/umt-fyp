@@ -3,14 +3,14 @@
 # %% auto 0
 __all__ = ['MultiHeadAttention', 'TransformerLayer', 'Encoder', 'DecoderLayer', 'Decoder', 'Transformer']
 
-# %% ../nbs/00_transformers.ipynb 13
+# %% ../nbs/00_transformers.ipynb 14
 import numpy as np
 import pandas as pd
 import os
 import torch
 import torch.nn as nn
 
-# %% ../nbs/00_transformers.ipynb 15
+# %% ../nbs/00_transformers.ipynb 16
 class MultiHeadAttention(nn.Module):
     def __init__(self, embed_size, heads):
         super(MultiHeadAttention, self).__init__()
@@ -77,7 +77,7 @@ class MultiHeadAttention(nn.Module):
         out = self.fc_out(out)
         return out
 
-# %% ../nbs/00_transformers.ipynb 17
+# %% ../nbs/00_transformers.ipynb 18
 class TransformerLayer(nn.Module):
     def __init__(self, embed_size, heads, dropout, forward_expansion=4):
         super(TransformerLayer, self).__init__()
@@ -100,7 +100,7 @@ class TransformerLayer(nn.Module):
         out = self.dropout(self.norm2(forward + x)) # out shape: (batch_size, query_len, embedding_size)
         return out
 
-# %% ../nbs/00_transformers.ipynb 19
+# %% ../nbs/00_transformers.ipynb 20
 class Encoder(nn.Module):
     def __init__(self, src_vocab_size, embed_size, num_layers, heads,
         device, forward_expansion, dropout, max_length): 
@@ -142,7 +142,7 @@ class Encoder(nn.Module):
         # output shape: torch.Size([batch_size, sequence_length, embedding_size])
         return out
 
-# %% ../nbs/00_transformers.ipynb 21
+# %% ../nbs/00_transformers.ipynb 22
 class DecoderLayer(nn.Module):
     def __init__(self, embed_size, heads, forward_expansion, dropout, device):
         super(DecoderLayer, self).__init__()
@@ -167,7 +167,7 @@ class DecoderLayer(nn.Module):
         out = self.transformer_block(value, key, query, src_mask)
         return out
 
-# %% ../nbs/00_transformers.ipynb 23
+# %% ../nbs/00_transformers.ipynb 24
 class Decoder(nn.Module):
     def __init__(self, trg_vocab_size, embed_size, num_layers, heads, forward_expansion,
         dropout, device, max_length):
@@ -213,7 +213,7 @@ class Decoder(nn.Module):
         out = self.fc_out(x)
         return out
 
-# %% ../nbs/00_transformers.ipynb 25
+# %% ../nbs/00_transformers.ipynb 26
 class Transformer(nn.Module):
     def __init__(self, src_vocab_size, trg_vocab_size, src_pad_idx, trg_pad_idx, embed_size=512,
                  num_layers=6, forward_expansion=4, heads=8, dropout=0, device="cpu", max_length=100):
